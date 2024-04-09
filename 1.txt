@@ -1,0 +1,1 @@
+create a csv files emp.csv with foll columns: empno,ename,dept,desig. take 2 inputs from user as empno and new desig. update desig of emp matching empno entered. write modified data to another csv

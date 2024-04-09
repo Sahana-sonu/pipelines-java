@@ -41,7 +41,7 @@ pipeline {
             deploy adapters: [tomcat9 (
                     credentialsId: 'tomcat_deploy_credentials',
                     path: '',
-                    url: 'http://52.172.90.142:8088/'
+                    url: 'http://52.167.200.192:8088/'
                 )],
                 contextPath: 'pipjob',
                 onFailure: 'false',

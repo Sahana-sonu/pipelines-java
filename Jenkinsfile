@@ -20,10 +20,10 @@ pipeline {
             }
         }
 
-        when {
-            branch 'dev'
-        }
         stage('Install') {
+            when {
+                branch 'dev'
+            }
             steps {
                 script {
                     echo 'Installing JAR to local Maven repository...'
@@ -32,10 +32,10 @@ pipeline {
             }
         }
 
-        when {
-            branch 'main'
-        }
         stage('Deploy') {
+            when {
+                branch 'main'
+            }
             steps {
                 script {
                     echo 'Deploying WAR file to Tomcat...'

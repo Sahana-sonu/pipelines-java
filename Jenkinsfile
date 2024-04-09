@@ -36,12 +36,19 @@ pipeline {
             when {
                 branch 'main'
             }
-            steps {
-                script {
-                    echo 'Deploying WAR file to Tomcat...'
-                    sh 'cp target/*.war /path/to/tomcat/webapps' // Example deployment command for main branch
-                }
-            }
+           steps {
+            echo "deploy stage"
+            deploy adapters: [tomcat9 (
+                    credentialsId: 'tomcat_deploy_credentials',
+                    path: '',
+                    url: 'http://52.172.90.142:8088/'
+                )],
+                contextPath: 'pipjob',
+                onFailure: 'false',
+                war: '**/*.war'
+           }
         }
+
+        
     }
 }

@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+    node {
+      label 'agent_dev1'
+    }
+  }
 
     stages {
         stage('Build') {
@@ -21,34 +25,12 @@ pipeline {
         }
 
         stage('Install') {
-            when {
-                branch 'dev'
-            }
-            steps {
+            steps{
                 script {
                     echo 'Installing JAR to local Maven repository...'
                     sh 'mvn install' // Example Maven install command for dev branch
                 }
             }
-        }
-
-        stage('Deploy') {
-            when {
-                branch 'main'
-            }
-           steps {
-            echo "deploy stage"
-            deploy adapters: [tomcat9 (
-                    credentialsId: 'tomcat_deploy_credentials',
-                    path: '',
-                    url: 'http://52.167.200.192:8088/'
-                )],
-                contextPath: 'pipjob',
-                onFailure: 'false',
-                war: '**/*.war'
-           }
-        }
-
-        
+        }      
     }
 }
